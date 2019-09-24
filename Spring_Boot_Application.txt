@@ -1,0 +1,231 @@
+----------------------------------------------------Course------------------------------------
+what is Spring Boot?
+
+building an end to end app
+
+Spring Boot features
+
+Configuration and customization
+
+
+
+----------------------------------------------------Spring - Boot-----------------------------
+
+what is Spring boot.
+
+Spring Boot is an open source Java-based framework used to create a micro Service. 
+It is developed by Pivotal Team and is used to build stand-alone and production ready spring applications.
+
+----------------------------------------------------Spring-------------------------------------
+
+What is Spring?
+
+its an APplication Framwork.
+
+
+Programing and configuration model.
+
+infrastructure support
+
+----------------------------------------------------Problem with Spring--------------------------
+
+Huge Framework
+
+Multiple setup steps
+
+multiple build and deploy step
+
+----------------------------------------------------Can we absrtact this Steps?------------------
+Yes --- With Spring Boot.................
+
+----------------------------------------------------Spring_Boot----------------------------------
+
+Opinionated
+
+Convention over configuration
+
+Stand alone
+
+Production ready
+
+----------------------------------------------------Set-up java  SDK------------------------------
+
+set java path varible and check with cmd java - version
+
+----------------------------------------------------Spring - Tool - suit--------------------------
+
+If you want others wise good to go with eclips IDE 
+
+----------------------------------------------------Java Dependencies With Maven------------------
+
+install maven into the system and check on cmd with mvn -version
+
+----------------------------------------------------Create a project------------------------------
+
+--------------------------------------------------- pom.xml---------------------------------------
+
+Add spring boot parent project to our project pom,xml file 
+it will inherite all the required configuration from that parent project
+
+Parent Spring boot Project :
+
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.5.9.RELEASE</version>
+</parent>
+
+Add spring mata dependency that we required in our project 
+
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+</dependencies>
+
+Note : if we get any error in pom file our project so 
+please clean install and update the project 
+
+Right-click the maven project or pom.xml
+Expand Run As
+Select Maven Build...
+Set Goals to the command, such as: clean install -X
+
+
+after this configuratio JRE version will be showing 1.6 so update it with currunt version 1.8
+
+using this configuration in pom.xml
+
+<properties>
+<java.version>1.8</java.version>
+</properties> 
+-----------------------------------------------------First Spring Boot Api-----------------------------------------------
+
+package io.javabrains.springbootstarter;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication 
+public class CourseApiApp {
+
+	public static void main(String[] args) {
+		
+		SpringApplication.run(CourseApiApp.class, args);
+		
+
+	}
+
+}
+
+
+here :
+
+@SpringBootApplication  : use to indicate this call is spring boot application
+
+All the stuf is done using main method because spring boot applications are  a stand alone applications
+
+SpringApplication : is static class that have run method 
+
+First Argument is CourseApiApp.class class that we are using as spring boot applications
+
+Secound Argument is pass using main method argument
+
+Console Output :
+
+2019-09-25 00:07:23.875  INFO 8116 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
+2019-09-25 00:07:23.901  INFO 8116 --- [           main] i.j.springbootstarter.CourseApiApp       : Started CourseApiApp in 10.606 seconds (JVM running for 11.523)
+
+it is start a contener and deploy the applcation and run the class 
+
+---------------------------------------------------Spring boot start up steps-----------------
+
+
+Starting spring boot -------------------
+
+* setup default configuration
+*start Spring application context
+*perform classpath scan
+*start tomcat server
+
+
+---------------------------------------------------Lets Add a Controller-----------------------
+
+*A java Class
+*Marked with annotations
+*Has info about 
+*** what URL access trigers it ?
+*** what method to run when aceessed?
+
+Controller-----------------------Class------------------------------
+
+package io.javabrains.springbootstarter.hello;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController 
+{
+
+	@RequestMapping("/hello")
+	public String sayHi()
+	{
+		return"Hii Shubham";
+	}
+}
+
+
+Here : 
+@RestController annotation : use to create rest ful api 
+@RequestMapping annotation : use to map the url 
+
+
+
+
+If you getting Error port is already occupied so kill the pross that already runnuing on the port 8080
+
+738
+
+Step 1
+
+Run command-line as an Administrator. Then run the below mention command. type your port number in yourPortNumber
+
+netstat -ano | findstr :yourPortNumber
+
+Like : netstat -ano | findstr :8080
+
+ TCP    0.0.0.0:8080           0.0.0.0:0              LISTENING       8116 ---------------->> this process identifier of process that is running 
+  TCP    [::]:8080              [::]:0                 LISTENING       8116
+
+
+Red coloured circled area shows the PID (process identifier)
+
+Step 2
+
+Then you execute this command after identify the PID.
+
+taskkill /PID typeyourPIDhere /F
+
+Like : taskkill /PID 8116 /F
+
+C:\Users\HP>taskkill /PID 8116 /F
+SUCCESS: The process with PID 8116 has been terminated.
+
+Again check if no process is running run your class
+
+
+
+P.S. Run the first command again to check if process is still available or not. You'll get empty line if process is successfully ended.
+
+
+ ----------------------------------More Controller mappings--------------------------------------
+ 
+ 
+
+
+
+
+
+
